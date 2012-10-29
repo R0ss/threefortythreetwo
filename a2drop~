@@ -1,0 +1,13 @@
+DROP TABLE Query1 CASCADE;
+DROP TABLE Query2 CASCADE;
+DROP TABLE Query3 CASCADE;
+DROP TABLE Query4 CASCADE;
+DROP TABLE Query5 CASCADE;
+DROP TABLE Query6 CASCADE;
+DROP TABLE Query7 CASCADE;
+
+DROP VIEW averagegrade;
+DROP VIEW comscistudentcountbyyear2001to2006;
+DROP VIEW ComsciCoursesWithStudentGrades;
+DROP VIEW PopularCourses;
+DROP VIEW ComsciAverages;

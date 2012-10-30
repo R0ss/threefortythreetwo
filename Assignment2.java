@@ -20,13 +20,14 @@ import java.sql.*;
 public class Assignment2 {
 
     Connection connection;
-   
+
     public static final String SFIRSTNAME = "sfirstname";
     public static final String SLASTNAME = "slastname";
     public static final String SEX = "sex";
     public static final String AGE = "age";
     public static final String YEAROFSTUDY = "yearofstudy";
-    public static final String DCODE = "dcode";    
+    public static final String DCODE = "dcode";
+    public static final String DNAME = "dname";
 
     public Assignment2() {
         loadJDBCDriver();
@@ -43,10 +44,9 @@ public class Assignment2 {
         }
     }
 
-    // TODO. Soft code.
     public boolean connectDB(String URL, String username, String password) {
         try {
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "");
+            connection = DriverManager.getConnection(URL, username, password);
             if (connection != null) {
                 return true;
             } else {
@@ -121,7 +121,8 @@ public class Assignment2 {
                 System.out.println("isInsertStudentConditionOK.isDepartmentExist false on " + dname);
                 return false;
             }
-            if (sex.equals("M") == false && sex.equals("F") == false) {
+            if (sex.equals("M") == false && sex.equals("m") == false &&
+				sex.equals("F") == false && sex.equals("f") == false) {
                 System.out.println(sex);
                 System.out.println("isInsertStudentConditionOK: M or F");
                 return false;
@@ -176,7 +177,7 @@ public class Assignment2 {
             e.printStackTrace();
         }
     }
-    
+
     private void closeStatement(PreparedStatement sql) {
         try {
             if (sql != null) {
@@ -219,9 +220,9 @@ public class Assignment2 {
     }
 
     public String getStudentInfo(int sid) {
-        String query = "SELECT * " + 
-                    "FROM student s " + 
-                    "WHERE s.sid = ?";
+        String query = "SELECT * " +
+                    "FROM student s, department d " +
+                    "WHERE s.sid = ? AND s.dcode = d.dcode";
         PreparedStatement sql = null;
         ResultSet result = null;
         try {
@@ -234,7 +235,7 @@ public class Assignment2 {
                         result.getString(SEX).trim() + ":" +
                         result.getInt(AGE) + ":" +
                         result.getInt(YEAROFSTUDY) + ":" +
-                        result.getString(DCODE).trim();                        
+                        result.getString(DNAME).trim();
             } else {
                 return "";
             }
@@ -254,7 +255,7 @@ public class Assignment2 {
      */
     public boolean chgDept(String dcode, String newName) {
         Statement sql = null;
-        String sqlText = "UPDATE department        " + 
+        String sqlText = "UPDATE department        " +
                         "SET dname = '" + newName + "'" +
                         "WHERE dcode = '" + dcode + "'";
         try {
@@ -267,40 +268,91 @@ public class Assignment2 {
             closeStatement(sql);
         }
     }
-    
+
     public boolean deleteDept(String dcode){
-        PreparedStatement sql = null;
-        String sqlText = "DELETE FROM department " + 
+        if (deleteStudentDcode(dcode) ||
+			deleteInstructorDcode(dcode) ||
+			deleteCourseDcode(dcode) ||
+			deleteDepartmentDcode(dcode)){
+			return true;
+		} else {
+			return false;
+		}
+    }
+
+	private boolean deleteDepartmentDcode(String dcode){
+		PreparedStatement sql = null;
+        String sqlText = "DELETE FROM department " +
                         "WHERE dcode = ?";
         try {
             sql = connection.prepareStatement(sqlText);
-            sql.setString(1, dcode);
-            return sql.executeUpdate() == 1;
+			sql.setString(1, dcode);
+            return sql.executeUpdate() >= 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         } finally {
             closeStatement(sql);
         }
-    }
+	}
 
-    /*
-     * taken. The list of courses should follow the contiguous format described
-     * Returns a string with all the courses a student with student id sid has
-     * above, and contain the following attributes in the order shown:
-     * “courseName1
-     * :department:semester:year:grade#courseName2:department:semester
-     * :year:grade#... ” Returns an empty string “” if the student does not
-     * exist.
-     */
+	private boolean deleteCourseDcode(String dcode){
+		PreparedStatement sql = null;
+        String sqlText = "DELETE FROM course " +
+                        "WHERE dcode = ?";
+        try {
+            sql = connection.prepareStatement(sqlText);
+			sql.setString(1, dcode);
+            return sql.executeUpdate() >= 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            closeStatement(sql);
+        }
+	}
+
+	private boolean deleteStudentDcode(String dcode){
+		PreparedStatement sql = null;
+        String sqlText = "DELETE FROM student " +
+                        "WHERE dcode = ?";
+        try {
+            sql = connection.prepareStatement(sqlText);
+			sql.setString(1, dcode);
+            return sql.executeUpdate() >= 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            closeStatement(sql);
+        }
+	}
+
+	private boolean deleteInstructorDcode(String dcode){
+		PreparedStatement sql = null;
+        String sqlText = "DELETE FROM instructor " +
+                        "WHERE dcode = ?";
+        try {
+            sql = connection.prepareStatement(sqlText);
+			sql.setString(1, dcode);
+            return sql.executeUpdate() >= 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            closeStatement(sql);
+        }
+	}
+
     public String listCourses(int sid) {
         String studentCourseInfo = "";
-        String sqlText = "SELECT C.cname AS cname, C.dcode AS dcode, CS.semester AS semester," + 
-                            "CS.year AS year, SC.grade AS grade " + 
-                        "FROM student S, studentCourse SC, courseSection CS, course C " + 
-                        "WHERE C.cid = CS.cid " + 
-                            "AND S.sid = SC.sid " + 
-                            "AND SC.csid = CS.csid " + 
+        String sqlText = "SELECT C.cname AS cname, D.dname AS dname, CS.semester AS semester," +
+                            "CS.year AS year, SC.grade AS grade " +
+                        "FROM student S, studentCourse SC, courseSection CS, course C, department D " +
+                        "WHERE C.cid = CS.cid " +
+			                "AND C.dcode = D.dcode " +
+                            "AND S.sid = SC.sid " +
+                            "AND SC.csid = CS.csid " +
                             "AND S.sid = '" + sid + "'";
         Statement sql = null;
         ResultSet rs = null;
@@ -311,7 +363,7 @@ public class Assignment2 {
                 // If it skips the first row, we might have to change it to a
                 // do-while loop
                 while (rs.next()) {
-                    studentCourseInfo += "#" + rs.getString("cname").trim() + ":" + rs.getString("dcode").trim() + ":" + rs.getString("semester").trim() + ":" + rs.getInt("year") + ":" + rs.getInt("grade");
+                    studentCourseInfo += "#" + rs.getString("cname").trim() + ":" + rs.getString("dname").trim() + ":" + rs.getString("semester").trim() + ":" + rs.getInt("year") + ":" + rs.getInt("grade");
                 }
                 // Close the resultset
                 rs.close();
@@ -331,55 +383,46 @@ public class Assignment2 {
         }
     }
 
-    /*
-     * Execute query 7 (highest and lowest average department marks) described
-     * in the Interactive SQL section above. Instead of inserting the results in
-     * a table, return them as a String in the same format as is specified for
-     * the output table for the query. Be sure to follow the prestated String
-     * rules involving colons and pound-signs for your return String. Do not use
-     * the views that you created in the SQL part. If you need views, create
-     * them when you execute function query7().
-     */
     public String query7() {
         String query7Info = "";
-        String sqlText = 
-                "SELECT cname, year, semester, grade                  " + 
-                "FROM PopularCourses P, ComsciAverages CA             " + 
+        String sqlText =
+                "SELECT cname, year, semester, grade                  " +
+                "FROM PopularCourses P, ComsciAverages CA             " +
                 "WHERE P.csid = CA.csid AND (                         " +
-                "   CA.grade = (                                      " + 
-                "        SELECT MAX(C1.grade)                         " + 
-                "        FROM PopularCourses P1, ComsciAverages C1    " + 
-                "        WHERE P1.csid = C1.csid                      " + 
-                "   ) OR CA.grade = (                                 " + 
-                "        SELECT MIN(C1.grade)                         " + 
-                "        FROM PopularCourses P1, ComsciAverages C1    " + 
-                "        WHERE P1.csid = C1.csid                      " + 
-                "   )                                                 " + 
+                "   CA.grade = (                                      " +
+                "        SELECT MAX(C1.grade)                         " +
+                "        FROM PopularCourses P1, ComsciAverages C1    " +
+                "        WHERE P1.csid = C1.csid                      " +
+                "   ) OR CA.grade = (                                 " +
+                "        SELECT MIN(C1.grade)                         " +
+                "        FROM PopularCourses P1, ComsciAverages C1    " +
+                "        WHERE P1.csid = C1.csid                      " +
+                "   )                                                 " +
                 ")";
         Statement sql = null;
         ResultSet rs = null;
         try {
             dropViewQuery7();
             createViewQuery7();
-            
+
             sql = connection.createStatement();
             rs = sql.executeQuery(sqlText);
             if (rs != null) {
                 // If it skips the first row, we might have to change it to a
                 // do-while loop
                 while (rs.next()) {
-                    query7Info += "#" + 
-                                rs.getString("cname").trim() + ":" + 
-                                rs.getInt("year") + ":" + 
-                                rs.getInt("semester") + ":" + 
+                    query7Info += "#" +
+                                rs.getString("cname").trim() + ":" +
+                                rs.getInt("year") + ":" +
+                                rs.getInt("semester") + ":" +
                                 rs.getInt("grade");
                 }
                 // Close the resultset
                 rs.close();
             }
-            
+
             dropViewQuery7();
-            
+
             if (query7Info.isEmpty()){
                 return "";
             } else {
@@ -394,10 +437,10 @@ public class Assignment2 {
             closeResultSet(rs);
         }
     }
-    
+
     private void createViewQuery7() throws SQLException {
         String sqlText1, sqlText2, sqlText3;
-       
+
         //Create tables
         sqlText1 = "CREATE VIEW ComsciCoursesWithStudentGrades AS(                  "
                  + "SELECT CS.csid, CS.year, CS.semester, SC.sid, SC.grade, C.cname "
@@ -406,23 +449,23 @@ public class Assignment2 {
                  + "AND CS.cid = C.cid                                              "
                  + "AND CS.dcode = D.dcode                                          "
                  + "AND D.dname = 'Computer Science')                               ";
-       
+
         sqlText2 = "CREATE VIEW ComsciAverages AS(              "
                  + "SELECT C.csid, AVG(C.grade) AS grade        "
                  + "FROM ComsciCoursesWithStudentGrades C       "
                  +  "GROUP BY C.csid)                           ";
-       
+
         sqlText3 = "CREATE VIEW PopularCourses AS(                  "
                  + "SELECT csid, cname, year, semester, COUNT(sid)  "
                  + "FROM ComsciCoursesWithStudentGrades             "
                  + "GROUP BY csid, cname, year, semester            "
                  + "HAVING COUNT(sid) >= 3)                         ";
-        
+
         Statement sql = connection.createStatement();
         sql.executeUpdate(sqlText1);
         sql.executeUpdate(sqlText2);
         sql.executeUpdate(sqlText3);
-        
+
         closeStatement(sql);
     }
 
@@ -438,10 +481,10 @@ public class Assignment2 {
         sql.executeUpdate(sqlText1);
         sql.executeUpdate(sqlText2);
         sql.executeUpdate(sqlText3);
-        
+
         closeStatement(sql);
     }
-    
+
     /*
      * Increases the grades of all the students who took a course in the course
      * section identified by csid by 10
@@ -451,8 +494,8 @@ public class Assignment2 {
         Statement sql2 = null;
         ResultSet rs = null;
         int newGrade;
-        String sqlText = "SELECT * " 
-                       + "FROM studentCourse " 
+        String sqlText = "SELECT * "
+                       + "FROM studentCourse "
                        + "WHERE csid = " + csid;
         try {
             sql = connection.createStatement();
@@ -463,7 +506,7 @@ public class Assignment2 {
                 // do-while loop
                 while (rs.next()) {
                     newGrade = (int) Math.min(rs.getInt("grade") * 1.1, 100);
-                    sqlText = "UPDATE studentCourse      " 
+                    sqlText = "UPDATE studentCourse      "
                             + " SET grade = " + newGrade
                             + " WHERE sid = " + rs.getString("sid")
                             + "     AND csid = '" + rs.getString("csid") + "'";
@@ -479,7 +522,7 @@ public class Assignment2 {
             closeStatement(sql);
         }
     }
-    
+
     public boolean updateDB(){
         PreparedStatement sql = null;
         String sqlText = "INSERT INTO femaleStudents (" +
@@ -501,14 +544,14 @@ public class Assignment2 {
             closeStatement(sql);
         }
     }
-    
+
     private void dropFemaleStudentsTable() throws SQLException {
         String sqlText = "DROP TABLE IF EXISTS femaleStudents";
         Statement sql = connection.createStatement();
         sql.executeUpdate(sqlText);
         closeStatement(sql);
     }
-    
+
     private void createFemaleStudentsTable() throws SQLException {
         String sqlText = "CREATE TABLE femaleStudents (" +
         		"     sid     INT," +
@@ -522,7 +565,7 @@ public class Assignment2 {
 
     public static void main(String[] argv) {
         Assignment2 a2 = new Assignment2();
-        if (a2.connectDB("", "", "") == false) {
+        if (a2.connectDB(argv[0], argv[1], argv[2]) == false) {
             System.out.println("a2.connectDB fail");
             return;
         } else {
@@ -539,51 +582,49 @@ public class Assignment2 {
             e.printStackTrace();
         }
 
-//        if (a2.insertStudent(663, "Wincester", "Sandra", 2000, "M", "Computer Science", 2)){
-//            System.out.println("insertStudent OK");
-//        } else {
-//            System.out.println("insertStudent FAIL");
-//        }
+		//        if (a2.insertStudent(662, "Wincester", "Sandra", 2000, "F", "Computer Science", 2)){
+		//            System.out.println("insertStudent OK");
+		//        } else {
+		//            System.out.println("insertStudent FAIL");
+		//        }
 
         System.out.println("getStudentCount: " + a2.getStudentCount("Computer Science"));
-        
-        // TODO. getStudentInfo should return department name instead of decode.
-        // listCourses, too.
+
         System.out.println("getStudentInfo: 666: " + a2.getStudentInfo(666));
-        
+
         if (a2.chgDept("MAT", "Mathemagick")){
             System.out.println("chgDept MAT to Mathemagick OK");
         } else {
             System.out.println("chgDept MAT to Mathemagick FAIL");
         }
-        
-        // TODO. Check lower case sexes too. In part 1, query 1 and part 2, 
-        // insertStudent, 
-        // TODO. Make avgGrade REAL instead of INT. Part 1 query 3 and 7, part 2
-        // query7.
-        
+
         System.out.println("listCourses: 666: " + a2.listCourses(666));
         System.out.println("listCourses: 9999: " + a2.listCourses(9999));
         System.out.println("listCourses: 664: " + a2.listCourses(664));
-        
+
         System.out.println("Query7: " + a2.query7());
-        
-        // TODO. Implement delete cascade. Currently supports only delete restrict.
-        if (a2.deleteDept("ASD")){
+
+        if (a2.deleteDept("CSC")){
             System.out.println("deleteDept OK");
         } else {
-            System.out.println("deleteDept FAIL");            
+            System.out.println("deleteDept FAIL");
         }
-        
+
+		if (a2.deleteCourseDcode("CSC")){
+            System.out.println("deleteCourseDcode OK");
+        } else {
+            System.out.println("deleteCourseDcode FAIL");
+        }
+
         if (a2.updateGrades(1003)){
             System.out.println("updateGrades 1003 OK");
         } else {
-            System.out.println("updateGrades 1003 FAIL");            
+            System.out.println("updateGrades 1003 FAIL");
         }
-        
+
         if (a2.updateDB()){
             System.out.println("updateDB OK");
-        } else {            
+        } else {
             System.out.println("updateDB FAIL");
         }
 
@@ -592,7 +633,7 @@ public class Assignment2 {
         } else {
             System.out.println("disconnectDB OK");
         }
-        
+
         /*
          * Soft code username, password.
          */

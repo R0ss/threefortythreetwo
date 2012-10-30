@@ -1,9 +1,9 @@
 INSERT INTO Query1 (
-	SELECT COUNT(*) AS num 
+	SELECT COUNT(*) AS num
 	FROM student s, department d
-	WHERE s.dcode=d.dcode 
-		AND s.sex='F'
-		AND d.dname='Computer Science' 
+	WHERE s.dcode=d.dcode
+		AND (s.sex='F' OR s.sex='f')
+		AND d.dname='Computer Science'
 		AND s.yearofstudy='4'
 );
 
@@ -47,32 +47,32 @@ INSERT INTO query5 (
 	(
 		SELECT c.cname
 		FROM coursesection cs, course c, department d
-		WHERE cs.cid = c.cid 
+		WHERE cs.cid = c.cid
 			AND c.dcode = d.dcode
 			AND d.dname = 'Computer Science'
 			AND cs.semester = 5
 	) EXCEPT (
 		SELECT c.cname
 		FROM coursesection cs, course c, department d
-		WHERE cs.cid = c.cid 
+		WHERE cs.cid = c.cid
 			and c.dcode = d.dcode
 			AND d.dname = 'Computer Science'
 			AND cs.semester <> 5
 	)
 );
 
-INSERT INTO Query6 (	
+INSERT INTO Query6 (
 	SELECT S.sfirstname AS fname, S.slastname AS lname, C.cname, CS.year, CS.semester
 	FROM Student S, StudentCourse SC, CourseSection CS, Course C, Prerequisites P
 	WHERE S.sid = SC.sid
-		AND SC.csid = CS.csid 
+		AND SC.csid = CS.csid
 		AND CS.cid = C.cid
 		AND CS.cid = P.cid
 		AND P.pcid NOT IN (
 			SELECT CS1.cid AS pcid
 			FROM StudentCourse SC1, CourseSection CS1
 			WHERE SC.sid = SC1.sid
-				AND SC1.csid = CS1.csid 
+				AND SC1.csid = CS1.csid
 				AND CS1.year + CS1.semester / 12.0 < CS.year + CS.semester / 12.0
 	)
 );

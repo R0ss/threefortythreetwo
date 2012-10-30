@@ -5,7 +5,6 @@ INSERT INTO department VALUES('MGK', 'Magick');
 INSERT INTO student VALUES('665', 'Wincester', 'Dean', 'M', '33', 'MGK', '2');
 INSERT INTO student VALUES('666', 'Wincester', 'Sam', 'M', '27', 'MGK', '1');
 INSERT INTO student VALUES('667', 'Angelica', 'Anna', 'F', '33', 'CSC', '4');
-
 INSERT INTO student VALUES('668', 'Angelicus', 'Castiel', 'M', '33', 'CSC', '5');
 INSERT INTO student VALUES('669', 'Angelicus', 'Michael', 'M', '33', 'CSC', '5');
 INSERT INTO student VALUES('670', 'Angelicus', 'Lucifer', 'M', '33', 'CSC', '5');

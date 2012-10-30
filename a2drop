@@ -6,8 +6,8 @@ DROP TABLE Query5 CASCADE;
 DROP TABLE Query6 CASCADE;
 DROP TABLE Query7 CASCADE;
 
-DROP VIEW averagegrade;
-DROP VIEW comscistudentcountbyyear2001to2006;
-DROP VIEW ComsciCoursesWithStudentGrades;
-DROP VIEW PopularCourses;
-DROP VIEW ComsciAverages;
+DROP VIEW averagegrade CASCADE;
+DROP VIEW comscistudentcountbyyear2001to2006 CASCADE;
+DROP VIEW ComsciCoursesWithStudentGrades CASCADE;
+DROP VIEW PopularCourses CASCADE;
+DROP VIEW ComsciAverages CASCADE;

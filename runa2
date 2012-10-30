@@ -1,0 +1,4 @@
+#!/bin/bash
+
+javac Assignment2.java
+java -cp postgresql-9.2-1000.jdbc4.jar:. Assignment2 jdbc:postgresql://localhost:5432/csc343h-c9truong c9truong ""

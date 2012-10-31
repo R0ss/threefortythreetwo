@@ -1,0 +1,64 @@
+INSERT INTO Query1 (
+	SELECT COUNT(*) AS num 
+	FROM student s, department d
+	WHERE s.dcode=d.dcode 
+		AND s.sex='F'
+		AND d.dname='Computer Science' 
+		AND s.yearofstudy='4'
+);
+
+INSERT INTO Query2 (
+	SELECT c.dname
+	FROM (
+		SELECT d.dname AS dname, COUNT(*) AS count
+		FROM instructor i, department d
+		WHERE i.idegree <> 'PHD' AND i.dcode = d.dcode
+		GROUP BY i.dcode, d.dname
+	) AS c
+	WHERE c.count >= ALL (
+		SELECT COUNT(*) AS count
+		FROM instructor i
+		WHERE i.idegree <> 'PHD'
+		GROUP BY i.dcode
+	)
+);
+
+INSERT INTO query3 (
+	SELECT *
+	FROM averagegrade ag
+	WHERE ag.avggrade = (
+		SELECT MAX(avggrade)
+		FROM averagegrade ag1
+		WHERE ag.dcode = ag1.dcode
+		GROUP BY dcode
+	)
+);
+
+INSERT INTO query4 (
+	SELECT *
+	FROM comscistudentcountbyyear2001to2006
+	WHERE count = (
+		SELECT MAX(count)
+		FROM comscistudentcountbyyear2001to2006
+	)
+);
+
+INSERT INTO query5 (
+	(
+		SELECT c.cname
+		FROM coursesection cs, course c, department d
+		WHERE cs.cid = c.cid 
+			AND c.dcode = d.dcode
+			AND d.dname = 'Computer Science'
+			AND cs.semester = 5
+	) EXCEPT (
+		SELECT c.cname
+		FROM coursesection cs, course c, department d
+		WHERE cs.cid = c.cid 
+			and c.dcode = d.dcode
+			AND d.dname = 'Computer Science'
+			AND cs.semester <> 5
+	)
+);
+
+

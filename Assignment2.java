@@ -565,7 +565,7 @@ public class Assignment2 {
 
     public static void main(String[] argv) {
         Assignment2 a2 = new Assignment2();
-        if (a2.connectDB(argv[0], argv[1], argv[2]) == false) {
+        if (a2.connectDB("jdbc:postgresql://localhost:5432/postgres", "postgres", "") == false) {
             System.out.println("a2.connectDB fail");
             return;
         } else {

@@ -1,0 +1,95 @@
+CREATE TABLE Query1 (
+	num		INT
+);
+
+CREATE TABLE Query2 (
+	dname	VARCHAR(20)
+);
+
+CREATE TABLE Query3 (
+	dept			VARCHAR(20),
+	sid				INT,
+	sfirstname		CHAR(20) NOT NULL,
+	slastname		CHAR(20) NOT NULL,
+	avgGrade		INT NOT NULL DEFAULT -1
+);
+
+-- Average grade of students, not including current semester.
+--
+-- Using a trick to compare (year, semester). This will 
+-- guanratee e.g. that 2012 + 9 / 12.0 < 2013 + 1 / 12.0.
+--
+-- 10.0 is fine for semester in 1 5 9, but not if say semester
+-- in months 1 to 12.
+--
+CREATE VIEW averagegrade AS (
+	SELECT s.dcode, s.sid, s.sfirstname, s.slastname, AVG(sc.grade) AS avggrade 
+	FROM student s, studentcourse sc, coursesection cs
+	WHERE s.sid = sc.sid AND sc.csid = cs.csid AND (cs.year, cs.semester) <> (
+		SELECT DISTINCT ON (year, semester) year, semester
+		FROM coursesection
+		WHERE year + semester / 12.0 = (
+			SELECT MAX(year + semester / 12.0)
+			FROM coursesection
+		)
+	)
+	GROUP BY s.sid, s.dcode, sc.sid, s.sfirstname, s.slastname
+);
+
+CREATE TABLE query4 (
+	year			INT,
+	enrollment		INT
+);
+
+-- Number of students enrolled in a comsci courses each year 
+-- between 2001 and 2006
+CREATE VIEW comscistudentcountbyyear2001to2006 AS (
+	SELECT cs.year, COUNT(sc.sid)
+	FROM department d, coursesection cs, studentcourse sc
+	WHERE d.dcode = cs.dcode 
+		AND d.dname = 'Computer Science'
+		AND cs.csid = sc.csid 
+		AND cs.year >= 2001 AND cs.year <= 2006
+	GROUP BY cs.year
+);
+
+CREATE TABLE query5 (
+	cname			CHAR(20) NOT NULL
+);
+
+CREATE TABLE query7 (
+    cname           CHAR(20) NOT NULL,
+    semester        INT,
+    year            INT,
+    avgmark         INT
+);
+
+-- List of comsci course offerings, and their students and grades.
+CREATE VIEW ComsciCoursesWithStudentGrades AS (
+    SELECT CS.csid, CS.year, CS.semester, SC.sid, SC.grade, C.cname 
+    FROM CourseSection CS, StudentCourse SC, Department D, Course C
+    WHERE CS.csid = SC.csid 
+        AND CS.cid = C.cid
+        AND CS.dcode = D.dcode
+        AND D.dname = 'Computer Science'
+);
+
+-- List of comsci course offerings that have at least 3 students.
+CREATE VIEW PopularCourses AS (
+    SELECT csid, cname, year, semester, COUNT(sid)
+    FROM ComsciCoursesWithStudentGrades
+    GROUP BY csid, cname, year, semester
+    HAVING COUNT(sid) >= 3
+);
+
+CREATE VIEW ComsciAverages AS (
+    SELECT C.csid, AVG(C.grade) AS grade
+    FROM ComsciCoursesWithStudentGrades C
+    GROUP BY C.csid
+);
+
+
+CREATE VIEW CoursesPrerequisites AS (
+    SELECT *
+    FROM CourseSection C JOIN Prerequisites P ON C.cid = P.cid
+);

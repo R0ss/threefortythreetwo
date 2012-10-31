@@ -2,5 +2,5 @@ CSC343 DATABASES ASSIGNMENT 2 PSQL
 
 TEAM MEMBERS
 
-	Ross Gatih
+	Ross Gatih              997 92 311 8
 	Trong Truong		995 94 222 6

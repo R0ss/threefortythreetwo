@@ -39,7 +39,7 @@ public class Assignment2 {
             Class.forName("org.postgresql.Driver");
             return true;
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return false;
         }
     }
@@ -53,7 +53,7 @@ public class Assignment2 {
                 return false;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return false;
         }
     }
@@ -76,7 +76,6 @@ public class Assignment2 {
     public boolean insertStudent(int sid, String lastName, String firstName, int age, String sex, String dname, int yearOfStudy) {
         try {
             if (isInsertStudentConditionOK(dname, sex, yearOfStudy) == false) {
-                System.out.println("isInsertStudentCondition false on " + dname + " " + sex + " " + yearOfStudy);
                 return false;
             }
 
@@ -84,7 +83,7 @@ public class Assignment2 {
 
             return insertNewStudent(sid, lastName, firstName, age, sex, dcode, yearOfStudy) == 1;
         } catch (SQLException e) {
-            // e.printStackTrace();
+//            e.printStackTrace();
             return false;
         }
     }
@@ -118,17 +117,13 @@ public class Assignment2 {
     private boolean isInsertStudentConditionOK(String dname, String sex, int yearOfStudy) throws SQLException {
         try {
             if (isDepartmentExist(dname) == false) {
-                System.out.println("isInsertStudentConditionOK.isDepartmentExist false on " + dname);
                 return false;
             }
             if (sex.equals("M") == false && sex.equals("m") == false &&
 				sex.equals("F") == false && sex.equals("f") == false) {
-                System.out.println(sex);
-                System.out.println("isInsertStudentConditionOK: M or F");
                 return false;
             }
             if (yearOfStudy < 1 || yearOfStudy > 5) {
-                System.out.println("isInsertStudentConditionOK.yearOfStudy");
                 return false;
             }
             return true;
@@ -174,7 +169,7 @@ public class Assignment2 {
                 sql.close();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 
@@ -184,7 +179,7 @@ public class Assignment2 {
                 sql.close();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 
@@ -194,7 +189,7 @@ public class Assignment2 {
                 result.close();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 
@@ -240,7 +235,7 @@ public class Assignment2 {
                 return "";
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return "";
         } finally {
             closeStatement(sql);
@@ -262,7 +257,7 @@ public class Assignment2 {
             sql = connection.createStatement();
             return sql.executeUpdate(sqlText) == 1;
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return false;
         } finally {
             closeStatement(sql);
@@ -289,7 +284,7 @@ public class Assignment2 {
 			sql.setString(1, dcode);
             return sql.executeUpdate() >= 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return false;
         } finally {
             closeStatement(sql);
@@ -305,7 +300,7 @@ public class Assignment2 {
 			sql.setString(1, dcode);
             return sql.executeUpdate() >= 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return false;
         } finally {
             closeStatement(sql);
@@ -321,7 +316,7 @@ public class Assignment2 {
 			sql.setString(1, dcode);
             return sql.executeUpdate() >= 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return false;
         } finally {
             closeStatement(sql);
@@ -337,7 +332,7 @@ public class Assignment2 {
 			sql.setString(1, dcode);
             return sql.executeUpdate() >= 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return false;
         } finally {
             closeStatement(sql);
@@ -375,7 +370,7 @@ public class Assignment2 {
                 return studentCourseInfo.substring(1);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return "";
         } finally {
             closeStatement(sql);
@@ -430,7 +425,7 @@ public class Assignment2 {
                 return query7Info.substring(1);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return "";
         } finally {
             closeStatement(sql);
@@ -515,7 +510,7 @@ public class Assignment2 {
             }
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return false;
         } finally {
             closeResultSet(rs);
@@ -562,80 +557,5 @@ public class Assignment2 {
         sql.executeUpdate(sqlText);
         closeStatement(sql);
     }
-
-    public static void main(String[] argv) {
-        Assignment2 a2 = new Assignment2();
-        if (a2.connectDB("jdbc:postgresql://localhost:5432/postgres", "postgres", "") == false) {
-            System.out.println("a2.connectDB fail");
-            return;
-        } else {
-            System.out.println("connectDB OK");
-        }
-
-        try {
-            if (a2.isDepartmentExist("Computer Science")) {
-                System.out.println("CSC exists");
-            } else {
-                System.out.println("CSC doesn't exist");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-		//        if (a2.insertStudent(662, "Wincester", "Sandra", 2000, "F", "Computer Science", 2)){
-		//            System.out.println("insertStudent OK");
-		//        } else {
-		//            System.out.println("insertStudent FAIL");
-		//        }
-
-        System.out.println("getStudentCount: " + a2.getStudentCount("Computer Science"));
-
-        System.out.println("getStudentInfo: 666: " + a2.getStudentInfo(666));
-
-        if (a2.chgDept("MAT", "Mathemagick")){
-            System.out.println("chgDept MAT to Mathemagick OK");
-        } else {
-            System.out.println("chgDept MAT to Mathemagick FAIL");
-        }
-
-        System.out.println("listCourses: 666: " + a2.listCourses(666));
-        System.out.println("listCourses: 9999: " + a2.listCourses(9999));
-        System.out.println("listCourses: 664: " + a2.listCourses(664));
-
-        System.out.println("Query7: " + a2.query7());
-
-        if (a2.deleteDept("CSC")){
-            System.out.println("deleteDept OK");
-        } else {
-            System.out.println("deleteDept FAIL");
-        }
-
-		if (a2.deleteCourseDcode("CSC")){
-            System.out.println("deleteCourseDcode OK");
-        } else {
-            System.out.println("deleteCourseDcode FAIL");
-        }
-
-        if (a2.updateGrades(1003)){
-            System.out.println("updateGrades 1003 OK");
-        } else {
-            System.out.println("updateGrades 1003 FAIL");
-        }
-
-        if (a2.updateDB()){
-            System.out.println("updateDB OK");
-        } else {
-            System.out.println("updateDB FAIL");
-        }
-
-        if (a2.disconnectDB() == false) {
-            System.out.println("a2.disconnectDB fail");
-        } else {
-            System.out.println("disconnectDB OK");
-        }
-
-        /*
-         * Soft code username, password.
-         */
-    }
+    
 }

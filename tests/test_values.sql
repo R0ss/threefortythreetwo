@@ -1,3 +1,5 @@
+-- DO NOT USE.
+
 INSERT INTO department VALUES('CSC', 'Computer Science');
 INSERT INTO department VALUES('MAT', 'Mathematics');
 INSERT INTO department VALUES('MGK', 'Magick');

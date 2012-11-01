@@ -1,3 +1,4 @@
+-- DO NOT USE.
 
 -- Output test number QueryX.Y when something's wrong: case column blank good.
 

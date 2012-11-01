@@ -1,0 +1,93 @@
+\documentclass[11pt]{article}
+
+%\usepackage{fullpage}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+
+\def\eq1{\mathbb{N}}
+
+\begin{document}
+
+\title{Assignment 2 \LaTeX \ Document}
+%\author{by: Ross Gatih}
+\date{\today}
+\maketitle
+
+%\tableofcontents
+
+\section{All Tables}
+\textbf{department}( \underline{dcode}, dname)\\
+\textbf{student}(\underline{sid}, slastname, sfirstname, sex, age, dcode, yearofstudy)\\
+\textbf{instructor}(\underline{iid}, ilastname, ifirstname, idegree, dcode)\\
+\textbf{course}(\underline{cid}, \underline{dcode},	cname)\\
+\textbf{courseSection}(\underline{csid}, cid, dcode, year, semester, section, iid)\\
+\textbf{studentCourse}(\underline{sid}, \underline{csid}, grade)\\
+\textbf{prerequisites}(\underline{cid}, \underline{dcode}, \underline{pcid}, \underline{pdcode})
+
+\section{Queries}
+
+\subsection{Number of female students}
+
+CORRECTION. SUM should be COUNT.
+
+Find the number of female students in the 'Computer Science' department who are in their
+fourth year of study.\\
+~\\
+\textbf{SELECT SUM}(s.sid) \textbf{AS} num\\
+\textbf{FROM} student s, department d\\
+\textbf{WHERE} s.dcode = d.dcode \textbf{AND}\\
+s.sex = 'F' \textbf{AND}\\
+s.yearofstudy = 4 \textbf{AND}\\
+d.dname = 'Computer Science'
+
+\subsection{Highest number of instructors}
+
+COR. MAX(SUM(i.iid)) bad syntax: can't nest aggregate functions.
+
+Find the department with the highest number of instructors who do not have a PHD degree.
+If there is a tie, return all tied departments.\\
+~\\
+\textbf{SELECT} d.dname \textbf{AS} dname\\
+\textbf{FROM} department d, instructor i\\
+\textbf{WHERE} d.dcode = i.dcode \textbf{AND}\\
+i.idegree != 'PHD'\\
+\textbf{GROUP BY} d.dname\\
+\textbf{HAVING} \textbf{MAX}(\textbf{SUM}(i.iid))
+
+\subsection{Best student}
+
+COR. Why is cs1.year = 5 and cs1.semester = 9? Same aggregate function nesting problem as previous.
+
+For each department find the best student. A student’s rank is determined by his or her average grade on all of the courses they have completed. Courses for the current semester should not be included. (Hint: The current semester occurs in the largest year/term value.) If there is a tie for first place, include all students in the tie.\\
+~\\
+\textbf{CREATE VIEW} completedSections \textbf{AS}\\
+(\textbf{SELECT} cS.csid, cS.dcode\\
+\textbf{FROM} courseSelection cS)\\
+\textbf{EXCEPT}\\
+(\textbf{SELECT} cS1.csid, cS1.dcode\\
+\textbf{FROM} courseSelection cS1\\
+\textbf{WHERE} cS1.year = 5 \textbf{AND}\\
+cS1.semester = 9)\\
+~\\
+\textbf{SELECT} d.dname \textbf{AS} dept, s.sid \textbf{AS} sid, s.sfirstname \textbf{AS} sfirstname,\\ s.slastname \textbf{AS} slastname, \textbf{AVG}(\textbf{SUM}(sC.grade)) \textbf{AS} avgGrade \\
+\textbf{FROM} department d, student s, studentCourse sC, completedSections cS\\
+\textbf{WHERE} s.sid = sC.sid \textbf{AND}\\
+sC.csid = cS.csid \textbf{AND}\\
+cS.dcode = d.dcode\\
+\textbf{GROUP BY} s.sid, d.dname\\
+\textbf{HAVING} \textbf{MAX}(\textbf{AVG}(\textbf{SUM}(sC.grade)))\\
+
+\subsection{Courses in Computer Science}
+
+COR. Why GROUP BY? Other than that the query returns courses offered in the summer, not courses that are offered only in the summer.
+
+Find all the courses in 'Computer Science' department that have been taught only in the summer semester. Do not report duplicates.\\
+~\\
+\textbf{SELECT} c.cname \textbf{AS} cname\\
+\textbf{FROM} department d, courseSection cS, course c\\
+\textbf{WHERE} cS.cid = c.cid \textbf{AND}\\
+c.dcode = d.dcode \textbf{AND}\\
+cS.semester = 5 \textbf{AND}\\
+d.dname = 'Computer Science'\\
+\textbf{GROUP BY} cS.csid
+\end{document}

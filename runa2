@@ -1,4 +1,14 @@
 #!/bin/bash
 
+POSTGRES='/opt/PostgreSQL/8.3/csc343/a2'
+SERVER='jdbc:postgresql://localhost:5432/postgres'
+USERNAME='postgres'
+PASSWORD=''
+
+sudo cp -r db/ $POSTGRES/
+
 javac Assignment2.java
-java -cp postgresql-9.2-1000.jdbc4.jar:. Assignment2 jdbc:postgresql://localhost:5432/csc343h-c9truong c9truong ""
+
+# -cp specifies the classpath, i.e. where your jar and class files are.
+# E.g. without the . at the end, java won't know where to look for Assignment2.
+java -cp lib/postgresql-9.2-1000.jdbc4.jar:. Assignment2

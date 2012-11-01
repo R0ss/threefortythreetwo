@@ -33,7 +33,6 @@ public class Assignment2 {
         loadJDBCDriver();
     }
 
-    // Load JDBC driver
     private boolean loadJDBCDriver() {
         try {
             Class.forName("org.postgresql.Driver");
@@ -436,7 +435,6 @@ public class Assignment2 {
     private void createViewQuery7() throws SQLException {
         String sqlText1, sqlText2, sqlText3;
 
-        //Create tables
         sqlText1 = "CREATE VIEW ComsciCoursesWithStudentGrades AS(                  "
                  + "SELECT CS.csid, CS.year, CS.semester, SC.sid, SC.grade, C.cname "
                  + "FROM CourseSection CS, StudentCourse SC, Department D, Course C "
@@ -467,7 +465,6 @@ public class Assignment2 {
     private void dropViewQuery7() throws SQLException {
         String sqlText1, sqlText2, sqlText3;
 
-        // Drop tables
         sqlText1 = "DROP VIEW IF EXISTS PopularCourses CASCADE";
         sqlText2 = "DROP VIEW IF EXISTS ComsciAverages CASCADE";
         sqlText3 = "DROP VIEW IF EXISTS ComsciCoursesWithStudentGrades CASCADE";

@@ -1,5 +1,5 @@
 all:
-	pdflatex *.tex
+	runa2
 
 clean:
 	rm -rf *~

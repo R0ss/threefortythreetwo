@@ -1,8 +1,0 @@
-\i ~/a2/a2drop
-\i ~/a2/A2.ddl
-\i ~/a2/test_values.psql
-
-\i ~/a2/a2tables
-\i ~/a2/a2sql
-
-\i ~/a2/test_cases.psql

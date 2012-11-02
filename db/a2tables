@@ -70,7 +70,7 @@ CREATE TABLE query7 (
     cname           CHAR(20) NOT NULL,
     semester        INT,
     year            INT,
-    avgmark         INT
+    avgmark         REAL
 );
 
 -- List of comsci course offerings, and their students and grades.

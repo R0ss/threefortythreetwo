@@ -415,7 +415,7 @@ public class Assignment2 {
                                 rs.getString("cname").trim() + ":" +
                                 rs.getInt("year") + ":" +
                                 rs.getInt("semester") + ":" +
-                                rs.getInt("grade");
+                                rs.getFloat("grade");
                 }
                 // Close the resultset
                 rs.close();

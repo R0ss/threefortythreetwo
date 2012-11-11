@@ -1,0 +1,1 @@
+PC defines topics, so we should have a table of topics. Every reviewer may express preference for multiple topics, so we should also have a table for that relationship.

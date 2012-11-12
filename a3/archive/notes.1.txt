@@ -1,3 +1,5 @@
+OUT OF DATE. Read report/report.pdf for latest.
+
 Entities
 	User
 		Login name
@@ -6,13 +8,14 @@ Entities
 		First name
 		Last name
 		Institution
-		Phone
 		Address
+		Phone
 		Role (chair/reviewer/author)
 	Conferencce
 		ID
 		Name
 		Description
+		Location
 		Start date
 		End date
 		Form
@@ -23,6 +26,7 @@ Entities
 		Title
 		Full version
 		Camera ready
+		Submission date
 Relationships
 	Author
 		User (author), paper
@@ -40,10 +44,8 @@ Relationships
 	
 ASSUMPTIONS
 
-	Every paper in a conference has the same number of reviewers.
-	
-	Every reviewer has just one area of expertise.
-	
-	Reviewers cannot request specific papers to review, only topics.
-	
+	We don't distinguish between author and coauthor: everyone's a coauthor.
+
+	Every paper in a conference has the same number of reviewers.	
+		
 	The chair only sends a letter to the user who submitted the paper, not all authors.

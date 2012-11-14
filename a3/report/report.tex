@@ -19,6 +19,8 @@
 %\usepackage{alltt} %%%%%%%%%%%%%%%%%%%%%%%%%%%% Use math in verbatim mode
 
 %\usepackage{graphicx}
+\usepackage{pdfpages}
+
 %\usepackage{rotating}
 \usepackage{framed}
 % This lets you box text: e.g.
@@ -135,7 +137,7 @@
 	Trong Truong\\
 	995 94 222 6
 	\end{flushleft}
-	\end{minipage}\\[0.5cm]
+	\end{minipage}\\[1cm]
 	
 	%\vfill
 	
@@ -151,13 +153,17 @@
 
 \section{Setup and login phase}
 
-{\bf Conference admin info.} For these and attributes of other entities and relationships, please see ER diagram in the next part.
+{\bf Number of reviewers.} Each conference has a fixed number of reviewers assigned per paper.
 
-{\bf File storage.} We'll only store filenames of papers, forms, letters in the database. The files themselves will be stored on a hard drive somewhere outside the database.
+{\bf Conference participant multiplicity.} Every user can participate in at most one role per conference, otherwise we have a conflict of interest. (E.g. a chair has the power to choose who gets to review a paper, so she might choose herself.)
+
+{\bf Conference topic multiplicity.} Every conference can define its own topics, or use existing topics from other conferences.
+
+{\bf File storage.} We'll only store filenames of papers, forms, and letters in the database. The files themselves will be stored on a hard drive somewhere outside the database.
 
 \section{Submission phase}
 
-{\bf Unique paperID.} Every paper will have a unique paperID across all conferences. This will remove the need to have Paper as a weak entity depending on Conference.
+{\bf Author conferencce participation.} An author may have an account without being registered in any conference. She may upload a paper without submitting it to any one.
 
 {\bf Different submissions are different papers.} An author has the option to update an existing submission instead of submitting an identical copy, but that's application, not database-level design, so we don't have to worry about that.
 
@@ -165,13 +171,9 @@
 
 \section{Reviewing phase}
 
-{\bf Number of reviewers.} Each conference has a fixed number of reviewers assigned per paper.
+{\bf Reviewer preference: bidding process.} To bid on a paper, a reviewer expresses her level of interest by assigning an integer between 0 (low) and 5 (high). 
 
-{\bf Reviewer expertise.} Each reviewer may have multiple areas of expertise, which correspond to paper topics.
-
-{\bf Reviewer paper preference.} A reviewer may express preference for a particular paper.
-
-{\bf Bidding process.} By bidding on a paper, a reviewer declares either YES or NO. It's up to the PC chair to decide among the YES sayers who to assign a paper.
+{\bf Reviewer's choice.} A reviewer casts a vote of YES or NO on whether or not she thinks the paper should be published.
 
 \section{Decision and publishing phase}
 
@@ -179,7 +181,8 @@
 
 \part{ER diagram}
 
-
+%\includegraphics[angle=90,scale=0.25]{./diagram/er}
+\includepdf{./diagram/er.pdf}
 
 \part{Relational schema}
 

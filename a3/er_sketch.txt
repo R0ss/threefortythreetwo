@@ -19,21 +19,30 @@ Entities
 		Start date
 		End date
 		Form
+		Number of reviewers per paper
 	Topic
+		ID
 		Topic name
 	Paper
+		ID
 		Abstract
 		Title
 		Full version
 		Camera ready
 		Submission date
 Relationships
+	Participate: User, Conference
+		Role
 	Author: User author, paper
+	Conflict of interest: Conference, User author, Paper
+	Expertise: User reviewer, Topic
+	Review: Conference, User reviewer, Paper
+		Comment
+	Bid: Conference, User reviewer, Paper
+		Bidding
+	Submission: Conference, User, Paper
 		Submitter
 		Acceptance notification letter
-	Conflict of interest: User author, Paper
-	Expertise: User reviewer, Topic
-	Review: User reviewer, Paper
-		Comment
-	 Bid: User reviewer, Paper
-	 	Bidding
+	Of: Topic, Conference
+	On: Topic, Paper
+	Expertise: Topic, User

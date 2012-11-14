@@ -4,5 +4,5 @@
 \contentsline {section}{\numberline {3}Reviewing phase}{3}
 \contentsline {section}{\numberline {4}Decision and publishing phase}{3}
 \contentsline {part}{II\hspace {1em}ER diagram}{3}
-\contentsline {part}{III\hspace {1em}Relational schema}{4}
-\contentsline {part}{IV\hspace {1em}PostgreSQL database definition}{4}
+\contentsline {part}{III\hspace {1em}Relational schema}{5}
+\contentsline {part}{IV\hspace {1em}PostgreSQL database definition}{5}

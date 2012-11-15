@@ -186,6 +186,151 @@
 
 \part{Relational schema}
 
+%USERS
+\textbf{Users}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+\underline{User name} & E-mail & Password & First name\\ 
+\hline 
+Last name & Institution & Address & Phone number\\
+\hline 
+\end{tabular}
+~\\
+~\\
+~\\
+%USER'S TOPICS OF EXPERTISE
+\textbf{User's expertise}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+\underline{User name} & \underline{Topic ID}\\ 
+\hline 
+\end{tabular}
+~\\
+~\\
+~\\
+%USER'S BID FOR PAPER
+\textbf{User's bid for paper}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+\underline{User name}&
+\underline{Paper ID}&
+\underline{Conference ID}&
+Interest\\
+\hline 
+\end{tabular}
+~\\
+~\\
+~\\
+%USER'S CONFLICT OF INTEREST
+\textbf{User's COI}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+\underline{User name}&
+\underline{Paper ID}&
+\underline{Conference ID}\\
+\hline 
+\end{tabular}
+~\\
+~\\
+~\\
+%USER'S REVIEW
+\textbf{User's review}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+\underline{User name}&
+\underline{Paper ID}&
+\underline{Conference ID}&
+Vote & Comment\\
+\hline 
+\end{tabular}
+~\\
+~\\
+~\\
+%USER'S SUBMISSION
+\textbf{User's submission}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+\underline{User name}&
+\underline{Paper ID}&
+\underline{Conference ID}&
+Submitter & Time & Letter\\
+\hline 
+\end{tabular}
+~\\
+~\\
+~\\
+%PAPERS
+\textbf{Papers}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+\underline{Paper ID} & Abstract & Title & Full version & Final version\\ 
+\hline 
+\end{tabular}
+~\\
+~\\
+~\\
+%PAPER'S CO-AUTHORS
+\textbf{Paper's co-authors}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+\underline{Paper ID} & \underline{User name}\\ 
+\hline 
+\end{tabular}
+~\\
+~\\
+~\\
+%PAPER'S TOPIC
+\textbf{Paper's topic}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+\underline{Paper ID} & \underline{Topic ID}\\
+\hline 
+\end{tabular}
+~\\
+~\\
+~\\
+%CONFERENCES
+\textbf{Conferences}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+\underline{Conference ID} & Name & Description & Location\\ 
+\hline 
+Start date & End date & Review form & Reviewers per paper\\
+\hline 
+\end{tabular}
+~\\
+~\\
+~\\
+%USERS PARTICIPATING AT CONFERENCE
+\textbf{Conference's committee}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+\underline{Conference ID} & \underline{User name} & Role\\ 
+\hline 
+\end{tabular}
+~\\
+~\\
+~\\
+%TOPICS OF CONFERENCE
+\textbf{Conference's topics}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+\underline{Conference ID} & \underline{Topic ID}\\ 
+\hline 
+\end{tabular}
+~\\
+~\\
+~\\
+%TOPICS
+\textbf{Topics}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+\underline{Topic ID} & Name & Description\\ 
+\hline 
+\end{tabular}
+
+
+
 
 
 \part{PostgreSQL database definition}

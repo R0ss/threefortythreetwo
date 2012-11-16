@@ -244,7 +244,7 @@ CONSTRAINT pk_Expertise PRIMARY KEY (User_id, Topic_id)
 
 CREATE TABLE COI
 (
-User_id	            VARCHAR (255) NOT NULL,
+User_id             VARCHAR (255) NOT NULL,
 Paper_id            INT NOT NULL,
 Conference_id       INT NOT NULL,
 CONSTRAINT COI_User FOREIGN KEY (User_id) REFERENCES User (Id),
@@ -258,7 +258,7 @@ CONSTRAINT pk_COI PRIMARY KEY (User_id, Paper_id, Conference_id)
 \begin{verbatim}
 CREATE TABLE Submission
 (
-User_id	            VARCHAR (255) NOT NULL,
+User_id             VARCHAR (255) NOT NULL,
 Paper_id            INT NOT NULL,
 Conference_id       INT NOT NULL,
 Time                TIME NOT NULL,
@@ -272,7 +272,7 @@ CONSTRAINT pk_Submission PRIMARY KEY (User_id, Paper_id, Conference_id)
 
 CREATE TABLE Author
 (
-User_id	            VARCHAR (255) NOT NULL,
+User_id             VARCHAR (255) NOT NULL,
 Paper_id            INT NOT NULL,
 CONSTRAINT Author_User FOREIGN KEY (User_id) REFERENCES User (Id),
 CONSTRAINT Author_Paper FOREIGN KEY (Paper_id) REFERENCES Paper (Id),

@@ -229,7 +229,80 @@ Interest)
 %TOPICS
 \item[\textbf{Topics:}](\underline{Topic ID}, Name, Description)
 \end{enumerate}
-
+\pagebreak
 \part{PostgreSQL database definition}
+
+\begin{verbatim}
+CREATE TABLE Expertise
+(
+User_id             VARCHAR(255) NOT NULL,
+Topic_idb           VARCHAR (255) NOT NULL,
+CONSTRAINT Expertise_User FOREIGN KEY (User_id) REFERENCES User (Id),
+CONSTRAINT Expertise_Topic FOREIGN KEY (Topic_id) REFERENCES Topic (Id),
+CONSTRAINT pk_Expertise PRIMARY KEY (User_id, Topic_id)
+);
+
+CREATE TABLE COI
+(
+User_id	            VARCHAR (255) NOT NULL,
+Paper_id            INT NOT NULL,
+Conference_id       INT NOT NULL,
+CONSTRAINT COI_User FOREIGN KEY (User_id) REFERENCES User (Id),
+CONSTRAINT COI_Paper FOREIGN KEY (Paper_id) REFERENCES Paper (Id),
+CONSTRAINT COI_Conference FOREIGN KEY (Conference_id) 
+REFERENCES Conference (Id),
+CONSTRAINT pk_COI PRIMARY KEY (User_id, Paper_id, Conference_id)
+);
+\end{verbatim}
+\pagebreak
+\begin{verbatim}
+CREATE TABLE Submission
+(
+User_id	            VARCHAR (255) NOT NULL,
+Paper_id            INT NOT NULL,
+Conference_id       INT NOT NULL,
+Time                TIME NOT NULL,
+Letter              VARCHAR (255) NOT NULL,
+CONSTRAINT Submission_User FOREIGN KEY (User_id) REFERENCES User (Id),
+CONSTRAINT Submission_Paper FOREIGN KEY (Paper_id) REFERENCES Paper (Id),
+CONSTRAINT Submission_Conference FOREIGN KEY (Conference_id) 
+REFERENCES Conference (Id),
+CONSTRAINT pk_Submission PRIMARY KEY (User_id, Paper_id, Conference_id)
+);
+
+CREATE TABLE Author
+(
+User_id	            VARCHAR (255) NOT NULL,
+Paper_id            INT NOT NULL,
+CONSTRAINT Author_User FOREIGN KEY (User_id) REFERENCES User (Id),
+CONSTRAINT Author_Paper FOREIGN KEY (Paper_id) REFERENCES Paper (Id),
+CONSTRAINT pk_Author PRIMARY KEY (User_id, Paper_id)
+);
+
+CREATE TABLE Conference
+(
+Id                  INT NOT NULL AUTO_INCREMENT,
+Name                VARCHAR (255) NOT NULL,
+Description         VARCHAR (255) NOT NULL,
+Location            VARCHAR (255),
+Start_date          DATE,
+End_date            DATE,
+Review_form         VARCHAR (255),
+Num_reviewer        INT,
+PRIMARY KEY (Id)
+);
+\end{verbatim}
+\pagebreak
+\begin{verbatim}
+CREATE TABLE ConferenceTopic
+(
+Conference_id       INT NOT NULL,
+Topic_id            INT NOT NULL,
+CONSTRAINT Submission_Ctopic FOREIGN KEY (Conference_id)
+REFERENCES Conference (Id),
+CONSTRAINT Ctopic_Topic FOREIGN KEY (Topic_id) REFERENCES Topic (Id),
+CONSTRAINT pk_Ctopic PRIMARY KEY (Conference_id, Topic_id)
+);
+\end{verbatim}
 \end{document}%}
 

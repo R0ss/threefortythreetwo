@@ -186,156 +186,50 @@
 
 \part{Relational schema}
 
+\begin{enumerate}
 %USERS
-\textbf{Users}\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline 
-\underline{User name} & E-mail & Password & First name\\ 
-\hline 
-Last name & Institution & Address & Phone number\\
-\hline 
-\end{tabular}
-~\\
-~\\
-~\\
+\item[\textbf{Users:}](\underline{User name}, E-mail, Password, First name, Last name, Institution,\\ Address, Phone number)
+
 %USER'S TOPICS OF EXPERTISE
-\textbf{User's expertise}\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline 
-\underline{User name} & \underline{Topic ID}\\ 
-\hline 
-\end{tabular}
-~\\
-~\\
-~\\
+\item[\textbf{User's expertise:}](\underline{User name}, \underline{Topic ID})
+
 %USER'S BID FOR PAPER
-\textbf{User's bid for paper}\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline 
-\underline{User name}&
-\underline{Paper ID}&
-\underline{Conference ID}&
-Interest\\
-\hline 
-\end{tabular}
-~\\
-~\\
-~\\
+\item[\textbf{User's bid for paper:}](\underline{User name}, \underline{Paper ID}, \underline{Conference ID},
+Interest)
+
 %USER'S CONFLICT OF INTEREST
-\textbf{User's COI}\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline 
-\underline{User name}&
-\underline{Paper ID}&
-\underline{Conference ID}\\
-\hline 
-\end{tabular}
-~\\
-~\\
-~\\
+\item[\textbf{User's COI:}](\underline{User name},
+\underline{Paper ID}, \underline{Conference ID})
+
 %USER'S REVIEW
-\textbf{User's review}\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline 
-\underline{User name}&
-\underline{Paper ID}&
-\underline{Conference ID}&
-Vote & Comment\\
-\hline 
-\end{tabular}
-~\\
-~\\
-~\\
+\item[\textbf{User's review:}](\underline{User name},
+\underline{Paper ID}, \underline{Conference ID}, Vote, Comment)
+
 %USER'S SUBMISSION
-\textbf{User's submission}\\
-\begin{tabular}{|c|c|c|c|c|c|c|}
-\hline 
-\underline{User name}&
-\underline{Paper ID}&
-\underline{Conference ID}&
-Time & Letter\\
-\hline 
-\end{tabular}
-~\\
-~\\
-~\\
+\item[\textbf{User's submission:}](\underline{User name}, \underline{Paper ID}, \underline{Conference ID}, Time, Letter)
+
 %PAPERS
-\textbf{Papers}\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline 
-\underline{Paper ID} & Abstract & Title & Full version & Final version\\ 
-\hline 
-\end{tabular}
-~\\
-~\\
-~\\
+\item[\textbf{Papers:}](\underline{Paper ID}, Abstract, Title, Full version, Final version)
+
 %PAPER'S CO-AUTHORS
-\textbf{Paper's co-authors}\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline 
-\underline{Paper ID} & \underline{User name}\\ 
-\hline 
-\end{tabular}
-~\\
-~\\
-~\\
+\item[\textbf{Paper's co-authors:}](\underline{Paper ID}, \underline{User name})
+
 %PAPER'S TOPIC
-\textbf{Paper's topic}\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline 
-\underline{Paper ID} & \underline{Topic ID}\\
-\hline 
-\end{tabular}
-~\\
-~\\
-~\\
+\item[\textbf{Paper's topic:}](\underline{Paper ID}, \underline{Topic ID})
+
 %CONFERENCES
-\textbf{Conferences}\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline 
-\underline{Conference ID} & Name & Description & Location\\ 
-\hline 
-Start date & End date & Review form & Reviewers per paper\\
-\hline 
-\end{tabular}
-~\\
-~\\
-~\\
+\item[\textbf{Conferences:}](\underline{Conference ID}, Name, Description, Location, Start date, End date, Review form, Reviewers per paper)
+
 %USERS PARTICIPATING AT CONFERENCE
-\textbf{Conference's committee}\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline 
-\underline{Conference ID} & \underline{User name} & Role\\ 
-\hline 
-\end{tabular}
-~\\
-~\\
-~\\
+\item[\textbf{Committee:}](\underline{Conference ID}, \underline{User name}, Role)
+
 %TOPICS OF CONFERENCE
-\textbf{Conference's topics}\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline 
-\underline{Conference ID} & \underline{Topic ID}\\ 
-\hline 
-\end{tabular}
-~\\
-~\\
-~\\
+\item[\textbf{Conference's topics:}](\underline{Conference ID}, \underline{Topic ID})
+
 %TOPICS
-\textbf{Topics}\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline 
-\underline{Topic ID} & Name & Description\\ 
-\hline 
-\end{tabular}
-
-
-
-
+\item[\textbf{Topics:}](\underline{Topic ID}, Name, Description)
+\end{enumerate}
 
 \part{PostgreSQL database definition}
-
-
-
 \end{document}%}
 

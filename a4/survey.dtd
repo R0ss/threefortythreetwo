@@ -4,7 +4,7 @@
 <!ELEMENT ID (#PCDATA)>
 <!ELEMENT Title (#PCDATA)>
 
-<!-- Assumption: MultipleQ defaults to any number of answers, unless k is specified -->
+<!ELEMENT SpecifiedQ (#PCDATA,TextAnswer+)>
 <!ELEMENT MultipleQ (#PCDATA,TextAnswer+)>
 <!ELEMENT TraditionalQ (#PCDATA,TextAnswer+)>
 <!ELEMENT TextAnswer (#PCDATA)>
@@ -15,21 +15,27 @@
 <!ELEMENT TimetableQ (#PCDATA,TimeSlot+)>
 <!ELEMENT TimeSlot (#PCDATA)>
 
-<!ATTLIST Survey ID ID #REQUIRED>
-<!ATTLIST MultipleQ ID ID #REQUIRED>
-<!ATTLIST TraditionalQ ID ID #REQUIRED>
-<!ATTLIST NumericQ ID ID #REQUIRED>
-<!ATTLIST TimetableQ ID ID #REQUIRED>
+<!ATTLIST Survey Id ID #REQUIRED>
+<!ATTLIST MultipleQ Id ID #REQUIRED>
+<!ATTLIST SpecifiedQ Id ID #REQUIRED>
+<!ATTLIST TraditionalQ Id ID #REQUIRED>
+<!ATTLIST NumericQ ID Id #REQUIRED>
+<!ATTLIST TimetableQ Id ID #REQUIRED>
+<!ATTLIST TextAnswer Id ID #REQUIRED>
+<!ATTLIST NumAnswer Id ID #REQUIRED>
 
+<!ATTLIST TraditionalQ Return IDREF #REQUIRED>
+<!ATTLIST MultipleQ Return IDREFS #REQUIRED>
+<!-- need ATTLIST for Specified,... -->
 
- A survey has an ID, a title, and one or more questions.
+<!--
+ A survey has an ID, a title, and one or more questions. ><
  There are several types of multiple choice question: traditional multiple choice questions
 (where exactly one answer must be selected), multiple choice questions where any number
 of answers may be selected, and multiple choice questions where exactly k answers must be
 selected (k must not be greater than the number of answer options).
  Any multiple choice question has answer options, and there are always at least two.
  In addition to multiple choice questions there are numeric and timetable questions,
-1
  A numeric question requires an integer answer; we won't handle 
 oats. A numeric question
 may have a lower and/or upper bound on acceptable response values.
@@ -39,3 +45,4 @@ availability. A timetable question can oer the user two choices (indicating tha
 available or not available) or these plus a third option that is in-between.
  Every question has a question ID and question text.
  Each question is either mandatory (users are required to answer these) or optional.
+-->

@@ -1,25 +1,41 @@
 <!-- A survey has an ID, a title, and one or more questions -->
-<!ELEMENT Survey (ID,Title,(TraditionalQ|MultipleQ|TimetableQ|NumericQ)+)>
+<!ELEMENT Survey (Title,(TraditionalQ|MultipleQ|TimetableQ|NumericQ)+)>
 <!ELEMENT Survey EMPTY>
 <!ELEMENT ID (#PCDATA)>
 <!ELEMENT Title (#PCDATA)>
 
-<!-- Assumption: defaults to any number of answers, unless k is specified -->
-<!ELEMENT MultipleQ (ID,#PCDATA,TextAnswer+)>
-<!ELEMENT TraditionalQ (ID,#PCDATA,TextAnswer+)>
+<!-- Assumption: MultipleQ defaults to any number of answers, unless k is specified -->
+<!ELEMENT MultipleQ (#PCDATA,TextAnswer+)>
+<!ELEMENT TraditionalQ (#PCDATA,TextAnswer+)>
 <!ELEMENT TextAnswer (#PCDATA)>
 
-<!ELEMENT NumericQ (ID,#PCDATA,NumAnswer)>
+<!ELEMENT NumericQ (#PCDATA,NumAnswer)>
 <!ELEMENT NumAnswer (#PCDATA)>
 
-<!ELEMENT TimetableQ (ID,#PCDATA,TimeSlot+)>
+<!ELEMENT TimetableQ (#PCDATA,TimeSlot+)>
 <!ELEMENT TimeSlot (#PCDATA)>
 
+<!ATTLIST Survey ID ID #REQUIRED>
+<!ATTLIST MultipleQ ID ID #REQUIRED>
+<!ATTLIST TraditionalQ ID ID #REQUIRED>
+<!ATTLIST NumericQ ID ID #REQUIRED>
+<!ATTLIST TimetableQ ID ID #REQUIRED>
 
-- A numeric question requires an integer answer; we won't handle quoats. A numeric question
+
+ A survey has an ID, a title, and one or more questions.
+ There are several types of multiple choice question: traditional multiple choice questions
+(where exactly one answer must be selected), multiple choice questions where any number
+of answers may be selected, and multiple choice questions where exactly k answers must be
+selected (k must not be greater than the number of answer options).
+ Any multiple choice question has answer options, and there are always at least two.
+ In addition to multiple choice questions there are numeric and timetable questions,
+1
+ A numeric question requires an integer answer; we won't handle 
+oats. A numeric question
 may have a lower and/or upper bound on acceptable response values.
-- Timetable questions have one or more timeslots associated with them (each described by text
-such as "Monday evenings" or \Dec 1st, 2-3pm"). For each one, the user will indicate their
-availability. A timetable question can offer the user two choices (indicating that they are
+ Timetable questions have one or more timeslots associated with them (each described by text
+such as \Monday evenings" or \Dec 1st, 2-3pm"). For each one, the user will indicate their
+availability. A timetable question can oer the user two choices (indicating that they are
 available or not available) or these plus a third option that is in-between.
-- Each question is either mandatory (users are required to answer these) or optional.
+ Every question has a question ID and question text.
+ Each question is either mandatory (users are required to answer these) or optional.

@@ -1,12 +1,19 @@
+
+<!ELEMENT Survey (ID, Title, Questions*)>
+<!ELEMENT Survey EMPTY>
 <!ELEMENT ID (#PCDATA)>
 <!ELEMENT Title (#PCDATA)>
 
-<!ELEMENT Questions (TraditionalQ*|MultipleQ*|TimetableQ*|NumericQ*)>
-<!ELEMENT TraditionalQ (#PCDATA)>
-<!ELEMENT Question EMPTY>
+<!-- Questions require 1 question type and at least 2 answers -->
+<!ELEMENT Questions ((TraditionalQ|MultipleQ|TimetableQ|NumericQ),Answer+)>
+<!ELEMENT Questions EMPTY>
+
+<!-- Assumption: defaults to any number of answers, unless k is specified -->
 <!ELEMENT MultipleQ (#PCDATA)>
+<!ELEMENT TraditionalQ (#PCDATA)>
 <!ELEMENT NumericQ (#PCDATA)>
 <!ELEMENT TimetableQ (#PCDATA)>
+<!ELEMENT Answer (#PCDATA)>
 
 A survey has an ID, a title, and one or more questions.
 

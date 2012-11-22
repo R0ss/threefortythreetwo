@@ -1,0 +1,177 @@
+== Survey ==
+
+Survey ID: csc301-2011
+Survey title: CSC301, fall 2011, group project survey
+
+Question ID "college", traditional multiple-choice; optional
+What college are you in?
+	Vic
+	UC
+	Trinity
+	New
+	Innis
+	St Mike's
+	Woodsworth
+
+Question ID "year", numeric, with range 0 to 5 inclusive; mandatory
+What year are you in?
+
+Question ID "courses", multiple choice and any number of answers may be chosen; mandatory
+Which of these courses have you already taken?
+	csc309
+	csc343
+	csc318
+	csc336/350
+
+Question ID "prefs", multiple choice and exactly two answers must be chosen; mandatory
+Which of these project domains are most interesting to you?  Pick two.
+	recommender systems
+	human genome
+	encryption
+	gaming
+	image processing
+	location-aware apps
+
+Question ID "times", timetable, with two answer choices per timeslot; mandatory
+When are you available for group meetings?
+Timeslots:
+	Mondays, 3pm
+	Mondays, 4pm
+	Tuesday evenings (after 5pm)
+	Fridays, 11am
+
+
+
+== Class ==
+
+(For this instance of a class file, we wil use each student's CDF
+account as their ID.)
+
+Student ID "g0cookie"
+	Vic
+	3
+	csc309; csc318
+	recommender systems; human genome
+	Mondays, 3pm: yes
+	Mondays, 4pm: no
+	Tuesday evenings (after 5pm): yes
+	Fridays, 11am: yes
+
+Student ID "g0ernie"
+	New
+	3
+	csc336/350
+	human genome; location-aware apps
+	Mondays, 3pm: yes
+	Mondays, 4pm: yes
+	Tuesday evenings (after 5pm): yes
+	Fridays, 11am: yes
+
+Student ID "g0bigbir"
+	Vic
+	4
+	csc318; csc343
+	human genome; image processing
+	Mondays, 3pm: no
+	Mondays, 4pm: yes
+	Tuesday evenings (after 5pm): yes
+	Fridays, 11am: no
+
+Student ID "g0dora"
+	Innis
+	2
+	took none of the courses
+	image processing; encryption
+	Mondays, 3pm: no
+	Mondays, 4pm: no
+	Tuesday evenings (after 5pm): yes
+	Fridays, 11am: no
+
+Student ID "g0diego"
+	Innis
+	4
+	csc318
+	image processing; encryption
+	Mondays, 3pm: no
+	Mondays, 4pm: yes
+	Tuesday evenings (after 5pm): yes
+	Fridays, 11am: yes
+
+Student ID "g0max"
+	UC
+	3
+	csc309; csc343
+	human genome; encryption
+	Mondays, 3pm: yes
+	Mondays, 4pm: yes
+	Tuesday evenings (after 5pm): yes
+	Fridays, 11am: no
+
+Student ID "g0ruby"
+	Woodsworth
+	4
+	csc309; csc343; csc318
+	human genome; image processing
+	Mondays, 3pm: yes
+	Mondays, 4pm: yes
+	Tuesday evenings (after 5pm): no
+	Fridays, 11am: no
+
+Student ID "g0arthur"
+	UC
+	3
+	csc336/350; csc318
+	location-aware apps; human genome
+	Mondays, 3pm: yes
+	Mondays, 4pm: yes
+	Tuesday evenings (after 5pm): yes
+	Fridays, 11am: no
+
+Student ID "g0dw"
+	Trinity
+	2
+	csc309; csc343
+	human genome; location-aware apps
+	Mondays, 3pm: no
+	Mondays, 4pm: yes
+	Tuesday evenings (after 5pm): yes
+	Fridays, 11am: no
+
+Student ID "g0franci"
+	college not given
+	3
+	csc343
+	human genome; encryption
+	Mondays, 3pm: no
+	Mondays, 4pm: yes
+	Tuesday evenings (after 5pm): no
+	Fridays, 11am: no
+
+Student ID "g0brain"
+	did not submit survey
+	
+
+== Division (group leaders are starred) ==
+
+Division ID = csc301-2011-v1
+min group size = 1
+max group size = 4
+
+group ID = Sesame Street
+"g0cookie"
+"g0ernie"
+* "g0bigbir"
+
+group ID = Dora the Explora
+* "g0dora"
+"g0diego"
+
+group ID = Max and Ruby
+"g0max"
+* "g0ruby"
+
+group ID = Arthur
+"g0arthur"
+* "g0dw"
+"g0franci"
+"g0brain"

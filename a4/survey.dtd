@@ -1,0 +1,29 @@
+<!ELEMENT ID (#PCDATA)>
+<!ELEMENT Title (#PCDATA)>
+
+<!ELEMENT Questions (TraditionalQ*|MultipleQ*|TimetableQ*|NumericQ*)>
+<!ELEMENT TraditionalQ (#PCDATA)>
+<!ELEMENT Question EMPTY>
+<!ELEMENT MultipleQ (#PCDATA)>
+<!ELEMENT NumericQ (#PCDATA)>
+<!ELEMENT TimetableQ (#PCDATA)>
+
+A survey has an ID, a title, and one or more questions.
+
+- There are several types of multiple choice question: traditional multiple choice questions
+(where exactly one answer must be selected), multiple choice questions where any number
+of answers may be selected, and multiple choice questions where exactly k answers must be
+selected (k must not be greater than the number of answer options).
+
+- Any multiple choice question has answer options, and there are always at least two.
+
+- In addition to multiple choice questions there are numeric and timetable questions,
+
+- A numeric question requires an integer answer; we won't handle quoats. A numeric question
+may have a lower and/or upper bound on acceptable response values.
+- Timetable questions have one or more timeslots associated with them (each described by text
+such as "Monday evenings" or \Dec 1st, 2-3pm"). For each one, the user will indicate their
+availability. A timetable question can offer the user two choices (indicating that they are
+available or not available) or these plus a third option that is in-between.
+- Every question has a question ID and question text.
+- Each question is either mandatory (users are required to answer these) or optional.

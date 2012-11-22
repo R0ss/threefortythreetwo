@@ -1,0 +1,4 @@
+<!ELEMENT Students (Student*)>
+<!ELEMENT Student EMPTY>
+<!ATTLIST Student who CDATA #REQUIRED>
+<!ATTLIST Student year CDATA #REQUIRED>

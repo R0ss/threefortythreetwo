@@ -1,0 +1,20 @@
+<!ELEMENT Division (group+)>
+
+
+
+<!ATTLIST Division ID ID #REQUIRED>
+<!ATTLIST Division MinGroup CDATA #IMPLIED>
+<!ATTLIST Division MaxGroup CDATA #IMPLIED>
+
+
+<!ELEMENT SurveyTitle (#PCDATA)>
+
+<!-- Data.txt appears to have a seperate tag for TimeSlots, but it looks redundant imo -->
+<!ELEMENT Question (#PCDATA,(Answer*|TimeSlots*))>
+<!ELEMENT TimeSlots (Answer*)>
+<!ELEMENT Answer (#PCDATA)>
+
+<!ATTLIST Survey 
+<!ATTLIST Question ID ID #REQUIRED>
+<!ATTLIST Question type CDATA #REQUIRED>
+<!ATTLIST Question IsRequired CDATA #REQUIRED>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Division SYSTEM "division.dtd">
+
+<!-- a response will indicate when the student has not completed the survey yet -->
+<!ELEMENT Responses (Student*)>
+<!ELEMENT Student (Answer*)>
+<!ELEMENT Answer (#PCDATA)>
+
+<!ATTLIST Student ID ID #REQUIRED>
+
+Student ID "g0cookie"
+Vic
+3
+csc309; csc318
+recommender systems; human genome
+Mondays, 3pm: yes
+Mondays, 4pm: no
+Tuesday evenings (after 5pm): yes
+Fridays, 11am: yes
+
+Student ID "g0ernie"
+New
+3
+csc336/350
+human genome; location-aware apps
+Mondays, 3pm: yes
+Mondays, 4pm: yes
+Tuesday evenings (after 5pm): yes
+Fridays, 11am: yes
+
+Student ID "g0bigbir"
+Vic
+4
+csc318; csc343
+human genome; image processing
+Mondays, 3pm: no
+Mondays, 4pm: yes
+Tuesday evenings (after 5pm): yes
+Fridays, 11am: no
+
+Student ID "g0dora"
+Innis
+2
+took none of the courses
+image processing; encryption
+Mondays, 3pm: no
+Mondays, 4pm: no
+Tuesday evenings (after 5pm): yes
+Fridays, 11am: no
+
+Student ID "g0diego"
+Innis
+4
+csc318
+image processing; encryption
+Mondays, 3pm: no
+Mondays, 4pm: yes
+Tuesday evenings (after 5pm): yes
+Fridays, 11am: yes
+
+Student ID "g0max"
+UC
+3
+csc309; csc343
+human genome; encryption
+Mondays, 3pm: yes
+Mondays, 4pm: yes
+Tuesday evenings (after 5pm): yes
+Fridays, 11am: no
+
+Student ID "g0ruby"
+Woodsworth
+4
+csc309; csc343; csc318
+human genome; image processing
+Mondays, 3pm: yes
+Mondays, 4pm: yes
+Tuesday evenings (after 5pm): no
+Fridays, 11am: no
+
+Student ID "g0arthur"
+UC
+3
+csc336/350; csc318
+location-aware apps; human genome
+Mondays, 3pm: yes
+Mondays, 4pm: yes
+Tuesday evenings (after 5pm): yes
+Fridays, 11am: no
+
+Student ID "g0dw"
+Trinity
+2
+csc309; csc343
+human genome; location-aware apps
+Mondays, 3pm: no
+Mondays, 4pm: yes
+Tuesday evenings (after 5pm): yes
+Fridays, 11am: no
+
+Student ID "g0franci"
+college not given
+3
+csc343
+human genome; encryption
+Mondays, 3pm: no
+Mondays, 4pm: yes
+Tuesday evenings (after 5pm): no
+Fridays, 11am: no
+
+Student ID "g0brain"
+did not submit survey

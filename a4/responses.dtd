@@ -1,5 +1,6 @@
 <!-- a response will indicate when the student has not completed the survey yet -->
-<!ELEMENT Student (Response*)>
-<!ELEMENT Response (#PCDATA)>
+<!ELEMENT Responses (Student*)>
+<!ELEMENT Student (Answer*)>
+<!ELEMENT Answer (#PCDATA)>
 
 <!ATTLIST Student ID ID #REQUIRED>

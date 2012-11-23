@@ -1,0 +1,4 @@
+<!ELEMENT Student (Response+)>
+<!ELEMENT Response (#PCDATA)>
+
+<!ATTLIST Student ID ID #REQUIRED>

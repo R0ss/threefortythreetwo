@@ -1,4 +1,5 @@
-<!ELEMENT Student (Response+)>
+<!-- Students who have not completed the servey can have zero responses -->
+<!ELEMENT Student (Response*)>
 <!ELEMENT Response (#PCDATA)>
 
 <!ATTLIST Student ID ID #REQUIRED>

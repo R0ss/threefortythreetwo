@@ -1,5 +1,6 @@
-<!-- Students who have not completed the servey can have zero responses -->
+<!-- a response will indicate when the student has not completed the survey yet -->
 <!ELEMENT Student (Response*)>
+<!ELEMENT br EMPTY>
 <!ELEMENT Response (#PCDATA)>
 
 <!ATTLIST Student ID ID #REQUIRED>

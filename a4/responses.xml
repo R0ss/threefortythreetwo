@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Responses SYSTEM "responses.dtd">
 <Responses>
-  <Student>
+  	<Student>
 		<ID>"g0cookie"</ID>
 		<Answer>Vic</Answer>
 		<Answer>3</Answer>

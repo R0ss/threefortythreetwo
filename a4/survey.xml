@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Survey SYSTEM "survey.dtd">
+<Survey>
+  <ID>csc301-2011</ID>
+	<Title>CSC301, fall 2011, group project survey</Title>
+	<Question>
+		<ID>"college"</ID>
+		<Type>traditional multiple-choice</Type>
+		<IsRequired>optional</IsRequired>
+		<Title>What college are you in?</Title>
+		<Answer>Vic</Answer>
+		<Answer>UC</Answer>
+		<Answer>Trinity</Answer>
+		<Answer>New</Answer>
+		<Answer>Innis</Answer>
+		<Answer>St Mike's</Answer>
+		<Answer>Woodsworth</Answer>
+	</Question>
+	<Question>
+		<ID>"year"</ID>
+		<Type>numeric</Type>
+		<Constraint>with range 0 to 5 inclusive</Constraint>
+		<IsRequired>mandatory</IsRequired>
+		<Title>What year are you in?</Title>
+		<Answer></Answer>
+	</Question>
+	<Question>
+		<ID>"courses"</ID>
+		<Type>multiple choice and any number of answers may be chosen</Type>
+		<IsRequired>mandatory</IsRequired>
+		<Title>Which of these courses have you already taken?</Title>
+		<Answer>csc309</Answer>
+		<Answer>csc343</Answer>
+		<Answer>csc318</Answer>
+		<Answer>csc336/350</Answer>
+	</Question>
+	<Question>
+		<ID>"prefs"</ID>
+		<Type>multiple choice and exactly two answers must be chosen</Type>
+		<IsRequired>mandatory</IsRequired>
+		<Title>Which of these project domains are most interesting to you?  Pick two.</Title>
+		<Answer>recommender systems</Answer>
+		<Answer>human genome</Answer>
+		<Answer>encryption</Answer>
+		<Answer>gaming</Answer>
+		<Answer>image processing</Answer>
+		<Answer>location-aware apps</Answer>
+	</Question>
+	<Question>
+		<ID>"times"</ID>
+		<Type>timetable</Type>
+		<Constraint>with two answer choices per timeslot</Constraint>
+		<IsRequired>mandatory</IsRequired>
+		<Title>When are you available for group meetings?</Title>
+		<Answer>Mondays, 3pm</Answer>
+		<Answer>Mondays, 4pm</Answer>
+		<Answer>Tuesday evenings (after 5pm)</Answer>
+		<Answer>Fridays, 11am</Answer>
+	</Question>
+</Survey>

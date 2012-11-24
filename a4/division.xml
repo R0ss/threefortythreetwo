@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE Division SYSTEM "division.dtd">
-<Division ID="csc301-2011-v1" MinGroup="1" MaxGroup="4">
-	<Group ID="Sesame Street">
+<Division MinGroup="1" MaxGroup="4">
+	<ID>csc301-2011-v1</ID>
+	<Group>
+		<ID>Sesame Street</ID>
 		<Student>"g0cookie"</Student>
 		<Student>"g0ernie"</Student>
 		<Student>* "g0bigbir"</Student>
 	</Group>
-	<Group ID="Dora the Explora">
+	<Group>
+		<ID>Dora the Explora</ID>
 		<Student>* "g0dora"</Student>
 		<Student>"g0diego"</Student>
 	</Group>
-	<Group ID="Max and Ruby">
+	<Group>
+		<ID>Max and Ruby</ID>
 		<Student>"g0max"</Student>
 		<Student>* "g0ruby"</Student>
 	</Group>
-	<Group ID="Arthur">
+	<Group>
+		<ID>Arthur</ID>
 		<Student>"g0arthur"</Student>
 		<Student>* "g0dw"</Student>
 		<Student>"g0franci"</Student>

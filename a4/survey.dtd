@@ -1,14 +1,10 @@
 <!-- A survey has an ID, a title, and one or more questions -->
-<!ELEMENT Survey (SurveyTitle,Question+)>
-<!ELEMENT SurveyTitle (#PCDATA)>
+<!ELEMENT Survey (ID,Title,Question+)>
+<!ELEMENT Question (ID,Type,Constraint?,IsRequired,Title,Answer+)>
 
-<!-- Data.txt appears to have a seperate tag for TimeSlots, but it looks redundant imo -->
-<!ELEMENT Question (#PCDATA,(Answer*|TimeSlots*))>
-<!ELEMENT TimeSlots (Answer*)>
+<!ELEMENT ID (#PCDATA)>
+<!ELEMENT Type (#PCDATA)>
+<!ELEMENT Constraint (#PCDATA)>
+<!ELEMENT IsRequired (#PCDATA)>
+<!ELEMENT Title (#PCDATA)>
 <!ELEMENT Answer (#PCDATA)>
-
-<!ATTLIST Survey ID ID #REQUIRED>
-<!ATTLIST Question ID ID #REQUIRED>
-<!ATTLIST Question type CDATA #REQUIRED>
-<!ATTLIST Question IsRequired CDATA #REQUIRED>
-<!ATTLIST Question Constraint CDATA #IMPLIED>

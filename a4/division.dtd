@@ -1,8 +1,7 @@
-<!ELEMENT Division (Group+)>
-<!ELEMENT Group (Student+)>
+<!ELEMENT Division (ID,Group+)>
+<!ELEMENT Group (ID,Student+)>
 <!ELEMENT Student (#PCDATA)>
+<!ELEMENT ID (#PCDATA)>
 
-<!ATTLIST Division ID ID #REQUIRED>
 <!ATTLIST Division MinGroup CDATA #IMPLIED>
 <!ATTLIST Division MaxGroup CDATA #IMPLIED>
-<!ATTLIST Group ID ID #REQUIRED>
